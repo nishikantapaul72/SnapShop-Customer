@@ -22,5 +22,5 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["src"]
+  "include": ["src", "node_modules/i18next-parser.config.js"]
 }

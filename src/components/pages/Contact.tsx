@@ -75,10 +75,10 @@ const Contact = () => {
                 Fill out our form and we will contact you within 24 hours.
               </p>
               <p className="text-sm text-gray-600">
-                Emails: customer@snapshop.com
+                Emails: customer@exclusive.com
               </p>
               <p className="text-sm text-gray-600">
-                Emails: support@snapshop.com
+                Emails: support@exclusive.com
               </p>
             </div>
 

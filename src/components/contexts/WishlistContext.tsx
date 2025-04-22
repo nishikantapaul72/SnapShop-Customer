@@ -1,5 +1,10 @@
-
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  ReactNode,
+} from "react";
 
 type WishlistItem = {
   id: number;
@@ -28,50 +33,55 @@ const WishlistContext = createContext<WishlistContextType>({
 
 export const useWishlist = () => useContext(WishlistContext);
 
-export const WishlistProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const WishlistProvider = ({ children }: { children: ReactNode }) => {
   const [wishlist, setWishlist] = useState<WishlistItem[]>([]);
 
   useEffect(() => {
-    const storedWishlist = localStorage.getItem('wishlist');
+    const storedWishlist = localStorage.getItem("wishlist");
     if (storedWishlist) {
       setWishlist(JSON.parse(storedWishlist));
     }
   }, []);
 
   useEffect(() => {
-    localStorage.setItem('wishlist', JSON.stringify(wishlist));
+    localStorage.setItem("wishlist", JSON.stringify(wishlist));
   }, [wishlist]);
 
-  const addToWishlist = (product: any) => {
-    setWishlist(prevWishlist => {
-      if (!prevWishlist.some(item => item.id === product.id)) {
+  const addToWishlist = (product: WishlistItem) => {
+    setWishlist((prevWishlist) => {
+      if (!prevWishlist.some((item) => item.id === product.id)) {
         alert(`${product.title} added to your wishlist.`);
-        return [...prevWishlist, {
-          id: product.id,
-          title: product.title,
-          price: product.price,
-          thumbnail: product.thumbnail
-        }];
+        return [
+          ...prevWishlist,
+          {
+            id: product.id,
+            title: product.title,
+            price: product.price,
+            thumbnail: product.thumbnail,
+          },
+        ];
       }
       return prevWishlist;
     });
   };
 
   const removeFromWishlist = (productId: number) => {
-    setWishlist(prevWishlist => {
-      const item = prevWishlist.find(item => item.id === productId);
-      const updatedWishlist = prevWishlist.filter(item => item.id !== productId);
-      
+    setWishlist((prevWishlist) => {
+      const item = prevWishlist.find((item) => item.id === productId);
+      const updatedWishlist = prevWishlist.filter(
+        (item) => item.id !== productId
+      );
+
       if (item) {
         alert(`${item.title} removed from your wishlist.`);
       }
-      
+
       return updatedWishlist;
     });
   };
 
   const isInWishlist = (productId: number) => {
-    return wishlist.some(item => item.id === productId);
+    return wishlist.some((item) => item.id === productId);
   };
 
   const getWishlistCount = () => {
@@ -84,14 +94,16 @@ export const WishlistProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   };
 
   return (
-    <WishlistContext.Provider value={{
-      wishlist,
-      addToWishlist,
-      removeFromWishlist,
-      isInWishlist,
-      getWishlistCount,
-      clearWishlist
-    }}>
+    <WishlistContext.Provider
+      value={{
+        wishlist,
+        addToWishlist,
+        removeFromWishlist,
+        isInWishlist,
+        getWishlistCount,
+        clearWishlist,
+      }}
+    >
       {children}
     </WishlistContext.Provider>
   );

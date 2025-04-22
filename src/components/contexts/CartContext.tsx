@@ -1,4 +1,10 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  ReactNode,
+} from "react";
 
 type CartItem = {
   id: number;
@@ -31,13 +37,12 @@ const CartContext = createContext<CartContextType>({
   getCartItemCount: () => 0,
 });
 
+// React Custom Hook
 export const useCart = () => useContext(CartContext);
 
-export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
+export const CartProvider = ({ children }: { children: ReactNode }) => {
   const [cart, setCart] = useState<CartItem[]>([]);
-
+  console.log("Children", children);
   useEffect(() => {
     const storedCart = localStorage.getItem("cart");
     if (storedCart) {
@@ -57,7 +62,6 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
       const existingItemIndex = prevCart.findIndex(
         (item) => item.id === product.id
       );
-
       if (existingItemIndex !== -1) {
         // If item exists, update quantity
         const updatedCart = [...prevCart];
@@ -84,7 +88,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
   const removeFromCart = (productId: number) => {
     setCart((prevCart) => {
       const item = prevCart.find((item) => item.id === productId);
-      const updatedCart = prevCart.filter((item) => item.id !== productId);
+      const updatedCart = prevCart.filter((item) => item.id !== productId); //creates a new array that includes all items except the one with the matching productId.
 
       if (item) {
         alert(`${item.title} has been removed from your cart.`);
