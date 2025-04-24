@@ -15,6 +15,17 @@ import Cart from "./components/pages/Cart";
 import { CartProvider } from "./components/contexts/CartContext";
 import { WishlistProvider } from "./components/contexts/WishlistContext";
 import Wishlist from "./components/pages/Wishlist";
+import ProtectedRoute from "./components/auth/ProtectedRoute";
+import Checkout from "./components/pages/Checkout";
+import Payment from "./components/pages/Payment";
+import OrderConfirmation from "./components/pages/OrderConfirmation";
+import PrivacyPolicy from "./components/pages/PrivacyPolicy";
+import TermsOfUse from "./components/pages/TermsOfUse";
+import FAQ from "./components/pages/FAQ";
+import Account from "./components/pages/Account";
+import Reviews from "./components/pages/Reviews";
+import Orders from "./components/pages/Orders";
+import Cancellations from "./components/pages/Cancellations";
 
 const queryClient = new QueryClient();
 
@@ -35,6 +46,7 @@ const App = () => {
           <WishlistProvider>
             <BrowserRouter>
               <Routes>
+                {/* Public Routes */}
                 <Route
                   path="/"
                   element={
@@ -135,23 +147,133 @@ const App = () => {
                   }
                 />
                 <Route
-                  path="/cart"
+                  path="/privacy-policy"
                   element={
                     <>
                       <ScrollToTop />
-                      <Cart />
+                      <PrivacyPolicy />
                     </>
+                  }
+                />
+                <Route
+                  path="/terms"
+                  element={
+                    <>
+                      <ScrollToTop />
+                      <TermsOfUse />
+                    </>
+                  }
+                />
+                <Route
+                  path="/faq"
+                  element={
+                    <>
+                      <ScrollToTop />
+                      <FAQ />
+                    </>
+                  }
+                />
+
+                {/* Protected Routes */}
+                <Route
+                  path="/account"
+                  element={
+                    <>
+                      <ProtectedRoute>
+                        <ScrollToTop />
+                        <Account />
+                      </ProtectedRoute>
+                    </>
+                  }
+                />
+                <Route
+                  path="/reviews"
+                  element={
+                    <>
+                      <ProtectedRoute>
+                        <ScrollToTop />
+                        <Reviews />
+                      </ProtectedRoute>
+                    </>
+                  }
+                />
+                <Route
+                  path="/orders"
+                  element={
+                    <>
+                      <ProtectedRoute>
+                        <ScrollToTop />
+                        <Orders />
+                      </ProtectedRoute>
+                    </>
+                  }
+                />
+                <Route
+                  path="/cancellations"
+                  element={
+                    <>
+                      <ProtectedRoute>
+                        <ScrollToTop />
+                        <Cancellations />
+                      </ProtectedRoute>
+                    </>
+                  }
+                />
+
+                <Route
+                  path="/cart"
+                  element={
+                    <ProtectedRoute>
+                      <ScrollToTop />
+                      <Cart />
+                    </ProtectedRoute>
                   }
                 />
                 <Route
                   path="/wishlist"
                   element={
-                    <>
+                    <ProtectedRoute>
                       <ScrollToTop />
                       <Wishlist />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/checkout"
+                  element={
+                    <>
+                      <ProtectedRoute>
+                        <ScrollToTop />
+                        <Checkout />
+                      </ProtectedRoute>
                     </>
                   }
                 />
+                <Route
+                  path="/payment"
+                  element={
+                    <>
+                      <ProtectedRoute>
+                        {" "}
+                        <ScrollToTop />
+                        <Payment />
+                      </ProtectedRoute>
+                    </>
+                  }
+                />
+                <Route
+                  path="/order-confirmation"
+                  element={
+                    <>
+                      <ProtectedRoute>
+                        <ScrollToTop />
+                        <OrderConfirmation />
+                      </ProtectedRoute>
+                    </>
+                  }
+                />
+
+                {/* Not Found Route */}
                 <Route
                   path="*"
                   element={

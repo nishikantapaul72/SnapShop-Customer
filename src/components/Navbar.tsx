@@ -135,12 +135,12 @@ const Navbar = () => {
               </Link>
               {!isLoggedIn && (
                 <Link
-                  to="/signup"
+                  to="/login"
                   className={`hover:text-[#e74c3c] ${
                     isActive("/signup") ? "border-b-2 border-[#e74c3c]" : ""
                   }`}
                 >
-                  Sign Up
+                  Log In
                 </Link>
               )}
             </div>

@@ -9,6 +9,8 @@ import CategoryGrid from "../CategoryGrid";
 import FeaturedBanner from "../FeaturedBanner";
 import FeaturedProducts from "../FeaturedProducts";
 import Services from "../Services";
+import CategoryMenu from "../CategoryMenu";
+import { useIsMobile } from "../hooks/use-mobile";
 
 const Index = () => {
   const { data: productsData, isLoading, error } = useProducts();
@@ -40,11 +42,18 @@ const Index = () => {
   const flashSaleProducts = discountedData?.products || [];
   const topRatedProducts = topRatedData?.products || [];
   const allProducts = productsData?.products?.slice(0, 10) || [];
-
+  const isMobile = useIsMobile();
   return (
     <div>
       <Navbar />
       <div className="max-w-7xl mx-auto px-4 py-0">
+        {/* Mobile Categories Button - Rendered outside the grid */}
+        {/* Mobile Menu */}
+        {isMobile && (
+          <div className="mb-4">
+            <CategoryMenu />
+          </div>
+        )}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
           {/* Categories sidebar with vertical divider */}
           <div className="hidden md:block border-r border-gray-500 pr-4 py-4">

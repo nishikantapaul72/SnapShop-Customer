@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import Navbar from "../Navbar";
 import Footer from "../Footer";
 import signup from "../../assets/signup.png";
@@ -16,6 +16,9 @@ type LoginFormData = yup.InferType<typeof schema>;
 
 const Login = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  console.log("Login Page location", location);
+  const from = location.state?.from || "/"; // Default to home if no redirect path
   const [message, setMessage] = useState<{
     text: string;
     type: "success" | "error";
@@ -42,7 +45,7 @@ const Login = () => {
       setMessage({ text: "Login successful. Redirecting...", type: "success" });
 
       setTimeout(() => {
-        navigate("/");
+        navigate(from, { replace: true }); // Redirect to the original destination
       }, 1500);
     } else {
       setMessage({ text: "Invalid username or password", type: "error" });
