@@ -5,6 +5,7 @@ import React, {
   useEffect,
   ReactNode,
 } from "react";
+import { toast } from "react-toastify";
 
 type WishlistItem = {
   id: number;
@@ -50,7 +51,7 @@ export const WishlistProvider = ({ children }: { children: ReactNode }) => {
   const addToWishlist = (product: WishlistItem) => {
     setWishlist((prevWishlist) => {
       if (!prevWishlist.some((item) => item.id === product.id)) {
-        alert(`${product.title} added to your wishlist.`);
+        toast.success(`${product.title} added to your wishlist.`);
         return [
           ...prevWishlist,
           {
@@ -73,7 +74,7 @@ export const WishlistProvider = ({ children }: { children: ReactNode }) => {
       );
 
       if (item) {
-        alert(`${item.title} removed from your wishlist.`);
+        toast.info(`${item.title} removed from your wishlist.`);
       }
 
       return updatedWishlist;
@@ -90,7 +91,7 @@ export const WishlistProvider = ({ children }: { children: ReactNode }) => {
 
   const clearWishlist = () => {
     setWishlist([]);
-    alert("Wishlist cleared. All items have been removed.");
+    toast.warn("Wishlist cleared: All items have been removed.");
   };
 
   return (

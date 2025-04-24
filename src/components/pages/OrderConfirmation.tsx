@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../contexts/CartContext";
 import { Check, CreditCard } from "lucide-react";
+import { toast } from "react-toastify";
 import Navbar from "../Navbar";
 import Footer from "../Footer";
 
@@ -23,7 +24,7 @@ const OrderConfirmation = () => {
 
     // Simulate order processing
     setTimeout(() => {
-      alert(
+      toast.success(
         "Order Placed Successfully! Thank you for your order. We've sent you a confirmation email."
       );
 

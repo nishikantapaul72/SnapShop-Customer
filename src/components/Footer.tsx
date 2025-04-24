@@ -7,6 +7,7 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 const Footer = () => {
   const [email, setEmail] = useState("");
@@ -14,8 +15,10 @@ const Footer = () => {
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
     if (email) {
-      alert("You have successfully subscribed to our newsletter.");
+      toast.success("You have successfully subscribed to our newsletter.");
       setEmail("");
+    } else {
+      toast.error("Please enter a valid email address");
     }
   };
 

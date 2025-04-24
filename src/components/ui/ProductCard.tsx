@@ -138,13 +138,19 @@ const ProductCard = ({ product, showAddToCart = true }: ProductCardProps) => {
 
         {/* Add to Cart Button */}
         {showAddToCart && (
-          <button
-            onClick={handleAddToCart}
-            className="w-full bg-black text-white text-sm py-2 rounded-md mt-2 flex items-center justify-center gap-2 hover:bg-[#e74c3c] transition-colors"
+          <div
+            className={`transition-opacity duration-300 ${
+              isHovered ? "opacity-100" : "opacity-0"
+            }`}
           >
-            <ShoppingCart className="w-4 h-4" />
-            Add To Cart
-          </button>
+            <button
+              onClick={handleAddToCart}
+              className="w-full bg-black text-white text-sm py-2 rounded-md mt-2 flex items-center justify-center gap-2 hover:bg-[#e74c3c] transition-colors"
+            >
+              <ShoppingCart className="w-4 h-4" />
+              Add To Cart
+            </button>
+          </div>
         )}
       </div>
     </div>

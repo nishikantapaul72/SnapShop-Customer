@@ -2,6 +2,7 @@ import { useState, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../contexts/CartContext";
 import { CreditCard, ArrowRight } from "lucide-react";
+import { toast } from "react-toastify";
 import Navbar from "../Navbar";
 import Footer from "../Footer";
 
@@ -74,7 +75,7 @@ const Payment = () => {
 
     // Simulate payment processing
     setTimeout(() => {
-      alert("Payment Verified. Proceeding to order confirmation.");
+      toast.success("Payment Verified. Proceeding to order confirmation.");
 
       navigate("/order-confirmation");
       setIsProcessing(false);

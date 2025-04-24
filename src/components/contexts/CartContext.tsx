@@ -5,7 +5,7 @@ import React, {
   useEffect,
   ReactNode,
 } from "react";
-
+import { toast } from "react-toastify";
 type CartItem = {
   id: number;
   title: string;
@@ -66,11 +66,11 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         // If item exists, update quantity
         const updatedCart = [...prevCart];
         updatedCart[existingItemIndex].quantity += quantity;
-        alert(`${product.title} quantity updated in your cart.`);
+        toast.success(`${product.title} quantity updated in your cart.`);
         return updatedCart;
       } else {
         // If item doesn't exist, add new item
-        alert(`${product.title} has been added to your cart.`);
+        toast.success(`${product.title} has been added to your cart.`);
         return [
           ...prevCart,
           {
@@ -91,7 +91,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
       const updatedCart = prevCart.filter((item) => item.id !== productId); //creates a new array that includes all items except the one with the matching productId.
 
       if (item) {
-        alert(`${item.title} has been removed from your cart.`);
+        toast.info(`${item.title} has been removed from your cart.`);
       }
 
       return updatedCart;
@@ -116,7 +116,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
 
   const clearCart = () => {
     setCart([]);
-    alert("Cart cleared: All items have been removed from your cart.");
+    toast.warn("Cart cleared: All items have been removed.");
   };
 
   const getCartTotal = () => {

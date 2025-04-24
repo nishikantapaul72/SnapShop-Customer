@@ -11,6 +11,7 @@ import {
   Eye,
   X,
 } from "lucide-react";
+import { toast } from "react-toastify";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { useCart } from "./contexts/CartContext";
@@ -60,7 +61,7 @@ const ProductDetails = () => {
   const handleAddToCart = () => {
     if (product) {
       addToCart(product, quantity);
-      alert(`${product.title} has been added to your cart.`);
+      //toast.success(`${product.title} has been added to your cart.`);
     }
   };
 
@@ -68,7 +69,7 @@ const ProductDetails = () => {
     const isLoggedIn = localStorage.getItem("isLoggedIn");
 
     if (!isLoggedIn || isLoggedIn !== "true") {
-      alert("Please login to add items to your wishlist.");
+      toast.error("Please login to add items to your wishlist.");
       navigate("/login");
       return;
     }

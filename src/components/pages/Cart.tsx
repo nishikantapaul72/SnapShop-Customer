@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useCart } from "../contexts/CartContext";
 import { ChevronUp, ChevronDown, Trash2 } from "lucide-react";
+import { toast } from "react-toastify";
 import Navbar from "../Navbar";
 import Footer from "../Footer";
 
@@ -19,9 +20,9 @@ const Cart = () => {
   const handleCouponApply = () => {
     if (couponCode) {
       console.log("Applying coupon:", couponCode);
-      alert("Coupon applied successfully!");
+      toast.success("Coupon applied successfully!");
     } else {
-      alert("Please enter a valid coupon code");
+      toast.error("Please enter a valid coupon code");
     }
   };
 

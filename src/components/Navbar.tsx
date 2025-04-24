@@ -137,7 +137,7 @@ const Navbar = () => {
                 <Link
                   to="/login"
                   className={`hover:text-[#e74c3c] ${
-                    isActive("/signup") ? "border-b-2 border-[#e74c3c]" : ""
+                    isActive("/login") ? "border-b-2 border-[#e74c3c]" : ""
                   }`}
                 >
                   Log In

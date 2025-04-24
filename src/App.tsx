@@ -1,6 +1,9 @@
 import React, { useEffect } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import Index from "./components/pages/Index";
 import Login from "./components/pages/Login";
 import SignUp from "./components/pages/SignUp";
@@ -219,7 +222,6 @@ const App = () => {
                     </>
                   }
                 />
-
                 <Route
                   path="/cart"
                   element={
@@ -254,7 +256,6 @@ const App = () => {
                   element={
                     <>
                       <ProtectedRoute>
-                        {" "}
                         <ScrollToTop />
                         <Payment />
                       </ProtectedRoute>
@@ -273,7 +274,7 @@ const App = () => {
                   }
                 />
 
-                {/* Not Found Route */}
+                {/* Not Found */}
                 <Route
                   path="*"
                   element={
@@ -285,6 +286,19 @@ const App = () => {
                 />
               </Routes>
             </BrowserRouter>
+            {/* Toast Container for Notifications */}
+            <ToastContainer
+              position="top-right"
+              autoClose={3000}
+              hideProgressBar={false}
+              newestOnTop={true}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme="light"
+            />
           </WishlistProvider>
         </CartProvider>
       </QueryClientProvider>

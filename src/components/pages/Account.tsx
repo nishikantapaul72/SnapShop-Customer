@@ -1,6 +1,6 @@
-
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import Navbar from "../Navbar";
 import Footer from "../Footer";
 
@@ -16,7 +16,7 @@ const Account = () => {
   const [passwords, setPasswords] = useState({
     currentPassword: "",
     newPassword: "",
-    confirmPassword: ""
+    confirmPassword: "",
   });
 
   const navigate = useNavigate();
@@ -26,23 +26,23 @@ const Account = () => {
     const isLoggedIn = localStorage.getItem("isLoggedIn");
     if (!isLoggedIn || isLoggedIn !== "true") {
       navigate("/login");
-      alert("Access denied. Please log in to view your account.");
+      toast.error("Access denied. Please log in to view your account.");
     }
   }, [navigate]);
 
   const handleUserDataChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setUserData(prev => ({
+    setUserData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setPasswords(prev => ({
+    setPasswords((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
@@ -63,7 +63,7 @@ const Account = () => {
 
   const handleSave = () => {
     // Here would be an API call to update user data
-    alert("Your profile information has been updated successfully");
+    toast.success("Your profile information has been updated successfully");
     setIsEditing(false);
   };
 
@@ -72,23 +72,23 @@ const Account = () => {
 
     // Validate password
     if (passwords.newPassword !== passwords.confirmPassword) {
-      alert("Error: New passwords don't match");
+      toast.error("Error: New passwords don't match");
       return;
     }
 
     if (passwords.currentPassword !== "123456") {
-      alert("Error: Current password is incorrect");
+      toast.error("Error: Current password is incorrect");
       return;
     }
 
     // Here would be an API call to update password
-    alert("Your password has been updated successfully");
+    toast.success("Your password has been updated successfully");
 
     // Clear password fields
     setPasswords({
       currentPassword: "",
       newPassword: "",
-      confirmPassword: ""
+      confirmPassword: "",
     });
   };
 
@@ -131,7 +131,9 @@ const Account = () => {
                   value={userData.firstName}
                   onChange={handleUserDataChange}
                   disabled={!isEditing}
-                  className={`w-full bg-gray-50 border rounded-md px-4 py-2 ${isEditing ? 'bg-white' : ''}`}
+                  className={`w-full bg-gray-50 border rounded-md px-4 py-2 ${
+                    isEditing ? "bg-white" : ""
+                  }`}
                 />
               </div>
               <div>
@@ -142,7 +144,9 @@ const Account = () => {
                   value={userData.lastName}
                   onChange={handleUserDataChange}
                   disabled={!isEditing}
-                  className={`w-full bg-gray-50 border rounded-md px-4 py-2 ${isEditing ? 'bg-white' : ''}`}
+                  className={`w-full bg-gray-50 border rounded-md px-4 py-2 ${
+                    isEditing ? "bg-white" : ""
+                  }`}
                 />
               </div>
               <div>
@@ -153,7 +157,9 @@ const Account = () => {
                   value={userData.email}
                   onChange={handleUserDataChange}
                   disabled={!isEditing}
-                  className={`w-full bg-gray-50 border rounded-md px-4 py-2 ${isEditing ? 'bg-white' : ''}`}
+                  className={`w-full bg-gray-50 border rounded-md px-4 py-2 ${
+                    isEditing ? "bg-white" : ""
+                  }`}
                 />
               </div>
               <div>
@@ -164,7 +170,9 @@ const Account = () => {
                   value={userData.address}
                   onChange={handleUserDataChange}
                   disabled={!isEditing}
-                  className={`w-full bg-gray-50 border rounded-md px-4 py-2 ${isEditing ? 'bg-white' : ''}`}
+                  className={`w-full bg-gray-50 border rounded-md px-4 py-2 ${
+                    isEditing ? "bg-white" : ""
+                  }`}
                 />
               </div>
             </div>
@@ -227,7 +235,10 @@ const Account = () => {
                 />
 
                 <div className="flex justify-end gap-4 mt-6">
-                  <button type="submit" className="px-6 py-2 bg-[#e74c3c] text-white rounded-md hover:bg-[#c0392b] transition-colors">
+                  <button
+                    type="submit"
+                    className="px-6 py-2 bg-[#e74c3c] text-white rounded-md hover:bg-[#c0392b] transition-colors"
+                  >
                     Change Password
                   </button>
                 </div>

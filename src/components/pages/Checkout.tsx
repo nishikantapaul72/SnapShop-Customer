@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useCart } from "../contexts/CartContext";
 import { CreditCard } from "lucide-react";
+import { toast } from "react-toastify";
 import Navbar from "../Navbar";
 import Footer from "../Footer";
 
@@ -29,7 +30,7 @@ const Checkout = () => {
       setIsLoggedIn(true);
     } else {
       // Redirect to login if not logged in
-      alert("Login Required: Please login to proceed to checkout");
+      toast.error("Please login to proceed to checkout");
       navigate("/login");
     }
   }, [navigate]);
@@ -44,9 +45,9 @@ const Checkout = () => {
 
   const handleCouponApply = () => {
     if (couponCode) {
-      alert("Coupon Applied: Your discount has been applied to the order");
+      toast.success("Your discount has been applied to the order");
     } else {
-      alert("Invalid Coupon: Please enter a valid coupon code");
+      toast.error("Please enter a valid coupon code");
     }
   };
 
@@ -54,7 +55,7 @@ const Checkout = () => {
     e.preventDefault();
 
     if (!isLoggedIn) {
-      alert("Login Required: Please login to place an order");
+      toast.error("Please login to place an order");
       navigate("/login");
       return;
     }
@@ -73,7 +74,7 @@ const Checkout = () => {
     );
 
     if (missingFields.length > 0) {
-      alert("Missing Information: Please fill in all required fields");
+      toast.error("Please fill in all required fields");
       return;
     }
 
