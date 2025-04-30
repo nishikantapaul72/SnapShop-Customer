@@ -92,6 +92,12 @@ src/
 - Protected routes  
 - Password reset capability  
 
+#### Test Credentials
+```
+Username: Rimel
+Password: 123456
+```
+
 ### 🛒 Shopping Features
 
 - Product catalog with categories  
