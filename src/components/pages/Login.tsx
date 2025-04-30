@@ -35,17 +35,27 @@ const Login = () => {
   const onSubmit = (data: LoginFormData) => {
     const { username, password } = data;
 
-    if (username === "Rimel" && password === "123456") {
+    // Get users from localStorage
+    const users = JSON.parse(localStorage.getItem('users') || '[]');
+    
+    // Check if user exists and password matches
+    const user = users.find(
+      (u: { username: string; password: string }) => 
+        u.username === username && u.password === password
+    );
+
+    // Also check for the default test user
+    if (user || (username === "Rimel" && password === "123456")) {
       localStorage.setItem("isLoggedIn", "true");
       localStorage.setItem(
         "currentUser",
-        JSON.stringify({ username: "Rimel", email: "rimel1111@gmail.com" })
+        JSON.stringify(user || { username: "Rimel", email: "rimel1111@gmail.com" })
       );
 
       setMessage({ text: "Login successful. Redirecting...", type: "success" });
 
       setTimeout(() => {
-        navigate(from, { replace: true }); // Redirect to the original destination
+        navigate(from, { replace: true });
       }, 1500);
     } else {
       setMessage({ text: "Invalid username or password", type: "error" });

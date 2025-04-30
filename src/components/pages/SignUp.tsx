@@ -7,6 +7,15 @@ import Navbar from "../Navbar";
 import Footer from "../Footer";
 import signup from "../../assets/signup.png";
 
+interface User {
+  username: string;
+  email: string;
+  password: string;
+  name: string;
+  address: string;
+  phone: string;
+}
+
 const validation = yup.object().shape({
   email: yup
     .string()
@@ -71,8 +80,34 @@ const SignUp = () => {
   });
 
   const onSubmit = (data: FormData) => {
-    // For now just log the data, simulate registration
-    console.log("User registered:", data);
+    // Get existing users from localStorage or initialize empty array
+    const existingUsers = JSON.parse(localStorage.getItem('users') || '[]') as User[];
+    
+    // Check if username or email already exists
+    const userExists = existingUsers.some(
+      (user: User) => user.username === data.username || user.email === data.email
+    );
+
+    if (userExists) {
+      setMessage({
+        text: "Username or email already exists!",
+        type: "error",
+      });
+      return;
+    }
+
+    // Add new user to the array
+    existingUsers.push({
+      username: data.username,
+      email: data.email,
+      password: data.password,
+      name: data.name,
+      address: data.address,
+      phone: data.phone
+    });
+
+    // Save updated users array to localStorage
+    localStorage.setItem('users', JSON.stringify(existingUsers));
 
     setMessage({
       text: "Account created successfully! Redirecting to login...",
