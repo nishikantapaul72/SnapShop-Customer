@@ -35,7 +35,7 @@ const ProductsCarousel = ({
   const [currentIndex, setCurrentIndex] = useState(0);
   const isMobile = useIsMobile();
   const [itemsPerPage, setItemsPerPage] = useState(5);
-
+  
   // Adjust items per page based on screen size
   useEffect(() => {
     if (isMobile) {
@@ -128,6 +128,7 @@ const ProductsCarousel = ({
             to={viewAllLink}
             className="inline-block py-3 px-8 bg-[#e74c3c] text-white rounded-md hover:bg-[#c0392b] transition-colors"
             state={{ products }} // Pass products as state to the destination page
+            onClick={() => window.scrollTo(0, 0)}
           >
             View All Products
           </Link>

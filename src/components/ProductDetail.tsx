@@ -39,7 +39,10 @@ const ProductDetails = () => {
 
   useEffect(() => {
     // Scroll to top when component mounts or id changes
-    window.scrollTo(0, 0);
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
   }, [id]);
 
   const { data: product, isLoading } = useQuery({

@@ -22,6 +22,11 @@ const Products = () => {
   const { data: fallbackData, isLoading: fallbackLoading } = useProducts();
 
   useEffect(() => {
+    // Scroll to top instantly when component mounts or location changes
+    window.scrollTo(0, 0);
+  }, [location]);
+
+  useEffect(() => {
     // Check if products were passed via state
     if (location.state && location.state.products) {
       setProducts(location.state.products);

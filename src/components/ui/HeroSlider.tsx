@@ -109,14 +109,16 @@ const HeroSlider = () => {
 
             <div className="flex h-full">
               {/* Text content section - left side */}
-              <div className="w-1/2 flex flex-col justify-center p-16">
-                <h2 className="text-5xl font-bold text-white mb-4">
+              <div className="w-1/2 flex flex-col justify-center p-4 md:p-16">
+                <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-white mb-2 md:mb-4 break-words">
                   {item.title}
                 </h2>
-                <p className="text-4xl text-white mb-10">{item.subtitle}</p>
+                <p className="text-xl md:text-3xl lg:text-4xl text-white mb-6 md:mb-10 break-words">
+                  {item.subtitle}
+                </p>
                 <Link
                   to={item.buttonLink}
-                  className="inline-flex items-center text-white text-lg font-medium border-b-2 border-white pb-1 w-max"
+                  className="inline-flex items-center text-white text-base md:text-lg font-medium border-b-2 border-white pb-1 w-max"
                 >
                   {item.buttonText}
                   <span className="ml-2">→</span>

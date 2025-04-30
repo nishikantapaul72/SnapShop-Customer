@@ -11,6 +11,11 @@ const CategoryPage = () => {
   const [formattedName, setFormattedName] = useState("");
 
   useEffect(() => {
+    // Scroll to top instantly when component mounts or category changes
+    window.scrollTo(0, 0);
+  }, [categoryName]);
+
+  useEffect(() => {
     if (categoryName) {
       setFormattedName(
         categoryName
